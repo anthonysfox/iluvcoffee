@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 
+// Catch decorator is used for an expection filter class
 @Catch(HttpException)
 export class HttpExceptionFilter<T extends HttpException>
   implements ExceptionFilter {
