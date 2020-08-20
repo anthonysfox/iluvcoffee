@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { ApiKeyGuard } from './common/guards/api-key.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -20,6 +22,14 @@ async function bootstrap() {
       },
     }),
   );
+
+  // Custom exception handler
+  // app.useGlobalFilters(new HttpExceptionFilter());
+
+  // example of using a guard globally
+  // would most likely put it above routes that need to be protected
+  // app.useGlobalGuards(new ApiKeyGuard());
+
   await app.listen(3000);
 }
 bootstrap();
