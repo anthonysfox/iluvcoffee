@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ApiKeyGuard } from './common/guards/api-key.guard';
+import { WrapResponseInterceptor } from './common/interceptor/wrap-response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -29,6 +30,8 @@ async function bootstrap() {
   // example of using a guard globally
   // would most likely put it above routes that need to be protected
   // app.useGlobalGuards(new ApiKeyGuard());
+
+  app.useGlobalInterceptors(new WrapResponseInterceptor());
 
   await app.listen(3000);
 }
