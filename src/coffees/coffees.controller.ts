@@ -18,11 +18,14 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Public } from '../common/decorators/public.decorator';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 import { Protocol } from 'src/common/decorators/protocol.decorator';
+import { ApiResponse, ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('coffees') // this groups routes together
 @Controller('coffees')
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
+  // @ApiForbiddenResponse({ description: 'Forbidden' }) // this is a way to describe what will be returned during different http responses
   // public sets metadata to say that this method is public and not private
   @Public()
   @Get()
